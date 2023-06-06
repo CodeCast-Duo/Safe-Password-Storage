@@ -33,7 +33,7 @@ var al = require("./app/Classes/Algoritm");
 
 const isValidJwt = (socket) => {
 	const address = socket.handshake.address;
-	if (address === '::ffff:127.0.0.1') {
+	if (address === '::1' || address === '::ffff:127.0.0.1') {
 		return true;
 	} else {
 		return false;
@@ -76,6 +76,14 @@ io.on('connection', (socket) => {
 		var keys = rsa.createKey();
 		socket.emit('returnKeys', keys);
 	}
+
+	socket.on('error', function (err) {
+		console.log("There was an error ", err);
+	});
+
+	socket.on('unauthorized', function (err) {
+		console.log("There was an error with the authentication:", err.message);
+	});
 
 	socket.on('disconnect', function () {
 		if (client.CheckUser(socket.client.id, socket.request.connection.remoteAddress)) {
