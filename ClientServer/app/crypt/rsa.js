@@ -14,7 +14,7 @@ class Keys {
 }
 
 class RSA extends Keys {
-    #privateKey;
+    privateKey;
     constructor(p, q) {
         super();
         this.p = p;
@@ -33,12 +33,12 @@ class RSA extends Keys {
         const random = Math.floor(Math.random() * primeNumbers.length);
         this.publicKey = primeNumbers[random];
 
-        this.#privateKey = 1;
+        this.privateKey = 1;
         do {
-            this.#privateKey++;
-        } while ((this.#privateKey * this.publicKey) % u != 1);
+            this.privateKey++;
+        } while ((this.privateKey * this.publicKey) % u != 1);
 
-        console.log("Private: " + this.#privateKey + " Public: " + this.publicKey);
+        console.log("Private: " + this.privateKey + " Public: " + this.publicKey);
         var key = new Keys();
         key.SetKeys(this.publicKey, this.n);
         return key;
@@ -77,7 +77,7 @@ class RSA extends Keys {
         console.log("Array2: " + arr.join(','));
         let textC = new Array(arr.length);
         for (var i = 0; i < textC.length; i++) {
-            var bigIn1 = Number(bigInt(arr[i]).pow(this.#privateKey).mod( this.n));
+            var bigIn1 = Number(bigInt(arr[i]).pow(this.privateKey).mod( this.n));
             textC[i] = String.fromCharCode(bigIn1);
         }
         let result = textC.join('');

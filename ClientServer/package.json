@@ -7,12 +7,13 @@
     "name": "Stas"
   },
   "scripts": {
-    "dev": "SET PORT=8000 && nodemon server.js",
+    "dev": "SET PORT=8000 && node server.js",
     "dev2": "SET PORT=8000 && node server.js",
     "debug": "nodemon --inspect server.js",
-    "start": "SET PORT=8000 && nodemon server.js --exec babel-cli"
+    "start": "SET PORT=8000 && nodemon server.js --exec ./node_modules/.bin/babel-node"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "big-integer": "^1.6.48",
     "body-parser": "^1.20.1",
